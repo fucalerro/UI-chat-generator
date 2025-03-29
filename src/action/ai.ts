@@ -16,9 +16,6 @@ export const postMessage = async (
     new Promise((resolve) => setTimeout(resolve, ms));
   await timeout(1000);
 
-  // const prePrompt =
-  //   "You are a chatbot that restyles a chat UI based on user input.";
-
   const props = {
     type: "object",
     properties: {
@@ -103,23 +100,6 @@ export const postMessage = async (
     };
   }
 
-  // const msg = JSON.stringify({
-  //   content: {
-  //     outputMessage:
-  //       "Welcome! How can I assist you today? Please share your queries or ideas!",
-  //     styles: {
-  //       outputMessages: {
-  //         backgroundColor: "#C0C0C0",
-  //         borderRadius: 5,
-  //         borderColor: "#000080",
-  //         color: "#000000",
-  //         padding: "10px",
-  //         borderWidth: "2px",
-  //       },
-  //     },
-  //   },
-  // });
-
   const parsed = JSON.parse(msg.content);
   console.log({ parsed });
 
@@ -128,11 +108,6 @@ export const postMessage = async (
     message: parsed.outputMessage,
     styles: parsed.styles,
   };
-
-  // const tesResp: Style = {
-  //   backgroundColor: "#0000FF",
-  //   borderRadius: null,
-  // };
 };
 
 type PrimitiveStyle = {

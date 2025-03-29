@@ -100,24 +100,31 @@ export default function Home() {
 
     console.log({ styles });
 
-    setStyle(styles);
+    setStyle((prev) => ({ ...prev, ...styles }));
     setMessages((msgs) => [...msgs, { message, type: "out" } as Message]);
     setLoadingOutput(false);
   };
 
   return (
     <html lang="en">
-      <body style={style?.background}>
-        <div className="h-screen box-border flex flex-col justify-between items-center !p-4 gap-4">
+      <body
+        style={style?.background}
+        className="flex flex-col items-center w-screen"
+      >
+        <div className="overflow-hidden !h-screen max-w-[950px] w-full  !box-border flex flex-col justify-between items-center !p-4 gap-4">
+          <div style={style?.title}>UI Chat generator</div>
           <div
-            className="flex flex-col gap-1 h-full max-w-[950px]"
+            className="flex flex-col gap-1 h-full w-full overflow-auto "
             style={style?.chatBox}
           >
-            <div style={style?.title}>UI Chat generator</div>
             {messages.map((msg, i) => (
               <div
-                style={style?.outputMessages}
-                className={`!w-fit !max-w-[90%] ${
+                style={
+                  msg.type === "in"
+                    ? style?.inputMessages
+                    : style?.outputMessages
+                }
+                className={`!w-fit !max-w-[90%]  ${
                   msg.type === "in" ? "self-end" : "self-start"
                 }`}
                 key={i}
@@ -125,9 +132,13 @@ export default function Home() {
                 {msg.message}
               </div>
             ))}
-            {loadingOutput && <div>...</div>}
+            {loadingOutput && (
+              <div style={style?.outputMessages} className="!w-fit">
+                ...
+              </div>
+            )}
           </div>
-          <div className="w-full flex gap-2">
+          <div className="w-full flex gap-2 justify-center">
             <input
               style={style?.inputBox}
               className="w-full"
