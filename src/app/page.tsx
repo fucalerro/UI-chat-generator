@@ -1,6 +1,8 @@
 "use client";
 
 import { postMessage, Style } from "@/action/ai";
+import { Github } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 type Message = {
@@ -112,7 +114,21 @@ export default function Home() {
         className="flex flex-col items-center w-screen"
       >
         <div className="overflow-hidden !h-screen max-w-[950px] w-full  !box-border flex flex-col justify-between items-center !p-4 gap-4">
-          <div style={style?.title}>UI Chat generator</div>
+          <div
+            style={style?.title}
+            className="flex flex-row justify-between w-full items-center"
+          >
+            <span>UI Chat generator</span>
+            <div>
+              <Link
+                href="https://github.com/fucalerro/UI-chat-generator"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github size={24} />
+              </Link>
+            </div>
+          </div>
           <div
             className="flex flex-col gap-1 h-full w-full overflow-auto "
             style={style?.chatBox}

@@ -83,13 +83,16 @@ export const postMessage = async (
     },
   };
 
+  const prePrompt =
+    "you must follow user instruction to modify the styling. dont hesitate to be creative and use shadows, hover, and other css properties to make it look good. \n\n";
+
   const completion = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     response_format: {
       type: "json_schema",
       json_schema: schema,
     },
-    messages: [{ role: "user", content: inputMessage }],
+    messages: [{ role: "user", content: prePrompt + "\n\n" + inputMessage }],
   });
 
   const msg = completion.choices[0].message;
